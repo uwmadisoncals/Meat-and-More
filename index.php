@@ -44,14 +44,23 @@ get_header(); ?>
 			
 			<div class="timelineEntries cf">
 				
-				<?php	if ( is_home() ) { query_posts( 'showposts=400' ); } ?>
+				<?php	// get posts
+$posts = get_posts(array(
+	'post_type'			=> 'post',
+	'posts_per_page'	=> -1,
+	'meta_key'			=> 'date_of_event',
+	'orderby'			=> 'meta_value_num',
+	'order'				=> 'DESC'
+)); ?>
 
-			<?php if ( have_posts() ) : ?>
+			<?php if ( $posts ) : ?>
 
 				<?php //twentyeleven_content_nav( 'nav-above' ); ?>
 
 				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php foreach( $posts as $post ): 
+		
+		setup_postdata( $post ) ?>
 					<?php $date = DateTime::createFromFormat('Ymd', get_field('date_of_event'));
 						
 						if($date) {
@@ -102,8 +111,8 @@ get_header(); ?>
 						
 						<span class="dot"></span>
 					</div>
-				<?php endwhile; ?>
-				
+				<?php endforeach; ?>
+					<?php wp_reset_postdata(); ?>
 				<?php endif; ?>
 				
 				
