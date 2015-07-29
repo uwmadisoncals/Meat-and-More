@@ -139,12 +139,38 @@ Version:        0.1.0
 	width: 4px;
 	min-height: 100px;
 	position: absolute;
-	top: -80px;
+	top: -40px;
 	left: 50%;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	background: rgba(0,0,0,0.2);
 	z-index:2;
+}
+
+.timeline .timelinestartdate, .timeline .timelinefuturedate {
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	z-index:2;
+	font-weight: bold;
+	width: 200px;
+	text-align: center;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	color: rgba(0,0,0,0.4);
+	font-size: 11px;
+}
+
+.timeline .timelinefuturedate {
+	display: none;
+}
+
+.timeline .today.future .timelinefuturedate {
+	display: block;
+}
+
+.timeline .today.future .timelinestartdate {
+	display: none;
 }
 
 .timeline .today {
@@ -184,10 +210,13 @@ Version:        0.1.0
 
 .timelineEntries .singletimelineentry {
 	clear: both;
-	width: 47%;
+	width: 44%;
+	margin: 3%;
 	position: relative;
-	margin-top: -80px;
+	margin-top: 0px;
 }
+
+
 
 .timelineEntries .singletimelineentry .timelinecontent {
 	position: relative;
@@ -257,17 +286,18 @@ Version:        0.1.0
 }
 
 .timelineEntries .singletimelineentry:nth-child(odd) {
-	float: left;
-	margin-right: 3%;
+	/*float: left;
+	margin-right: 3%;*/
 }
 
 .timelineEntries .singletimelineentry:nth-child(even) {
-	float: right;
-	margin-left: 3%;
+	/*float: right;
+	margin-left: 3%;*/
+	margin-top: 80px;
 }
 
 
-.timelineEntries .singletimelineentry:nth-child(odd) .timelinecontent:after {
+.timelineEntries .singletimelineentry.right-dot .timelinecontent:after {
 	left: 100%;
 	top: 22px;
 	border: solid transparent;
@@ -282,7 +312,7 @@ Version:        0.1.0
 	margin-top: -12px;
 }
 
-.timelineEntries .singletimelineentry:nth-child(even) .timelinecontent:after {
+.timelineEntries .singletimelineentry.left-dot .timelinecontent:after {
 	right: 100%;
 	top: 22px;
 	border: solid transparent;
@@ -297,7 +327,7 @@ Version:        0.1.0
 	margin-top: -12px;
 }
 
-.timelineEntries .singletimelineentry:nth-child(odd) .dot {
+.timelineEntries .singletimelineentry.right-dot .dot {
 	display: block;
 	width: 10px;
 	height: 10px;
@@ -305,14 +335,14 @@ Version:        0.1.0
 	border-radius: 50px;
 	position: absolute;
 	top: 16px;
-	right: -8.7%;
+	right: -9.3%;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	background: #e4b826;
 	z-index:3;
 }
 
-.timelineEntries .singletimelineentry:nth-child(even) .dot {
+.timelineEntries .singletimelineentry.left-dot .dot {
 	display: block;
 	width: 10px;
 	height: 10px;
@@ -320,7 +350,7 @@ Version:        0.1.0
 	border-radius: 50px;
 	position: absolute;
 	top: 16px;
-	left: -6.5%;
+	left: -6.8%;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	background: #e4b826;
@@ -328,14 +358,14 @@ Version:        0.1.0
 }
 
 .timelineEntries .singletimelineentry.future {
-	height: 0px;
+	/*height: 0px;
 	visibility: hidden;
 	opacity: 0;
 	z-index:5;
 	transform: translateX(-80px);
 	-webkit-transform: translateX(-80px);
 	
-	transition: 0.4s;
+	transition: 0.4s;*/
 }
 
 .timelineEntries .singletimelineentry.future.futureShown {

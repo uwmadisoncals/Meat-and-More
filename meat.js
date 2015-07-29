@@ -23,13 +23,58 @@ $( document ).ready(function() {
 	
 	$(".futureEvents").click(function(e) {
 		
-		$(".timelineEntries .future").toggleClass("futureShown");
+		$(".timelineEntries .future").toggleClass("futureHidden");
+		
+		$(".timeline .today").toggleClass("future");
+		
+		$('.timelineEntries').isotope();
+		setTimeout(function() { adjustTimeline(); timelinecheck(); },500);
+		
 		
 	});
+	
+	
+	$('.timelineEntries').isotope({
+	  // options...
+	  itemSelector: '.singletimelineentry',
+	  filter: ':not(.futureHidden)',
+	  masonry: {
+	    columnWidth: '.singletimelineentry'
+	  }
+	});
+	
+	function adjustTimeline() {
+		$(".timelineEntries .singletimelineentry").each(function() {
+			var currentLeft = $(this).css("left");
+			
+			
+			//console.log(currentLeft);
+			
+			if(currentLeft != "auto") {
+					
+				if(currentLeft == "0px") {
+					//$(this).css("margin-top","0px");
+					$(this).addClass("right-dot");
+					$(this).removeClass("left-dot");
+				} else {
+					//$(this).css("margin-top","80px");
+					$(this).addClass("left-dot");
+					$(this).removeClass("right-dot");
+				}
+			
+			}
+			
+			
+		});
+	}
 
+	adjustTimeline();
+	timelinecheck();
 
 	
 	if($('body').is('.home')){
+	
+	var f;
 
 	 var peoplecount = 0;
 
@@ -45,16 +90,50 @@ $( document ).ready(function() {
 			
 			
 			var resultscounted = 0;
+			
+			
+			
+			if (filter.length < 1) {
+				
+				$('.timelineEntries').isotope({
+				  // options...
+				  itemSelector: '.singletimelineentry',
+				  filter: ':not(.futureHidden)',
+				  masonry: {
+				    columnWidth: '.singletimelineentry'
+				  }
+				});
+				clearTimeout(f);
+				f = setTimeout(function() { adjustTimeline(); timelinecheck(); },500);
+			
+			} else {
+				$('.timelineEntries').isotope({
+			 
+				  itemSelector: '.singletimelineentry',
+				  filter: function() {
+					  var name = $(this).find(".textContent").text();
+					  var re = new RegExp(filter, "i");
+					  return name.match(re);
+					},
+				  masonry: {
+				    columnWidth: '.singletimelineentry'
+				  }
+				});
+				clearTimeout(f);
+				f = setTimeout(function() { adjustTimeline(); },500);
+			}
 			    
 			$(".timelineEntries .singletimelineentry").each(function () {
 				
+				
+				
 			
-		        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+		        /*if ($(this).text().search(new RegExp(filter, "i")) < 0) {
 		        	$(this).addClass("hidden"); 
 		        	$(this).removeClass("visible"); 
 			       
 			        
-		        } else {
+		        } else {*/
 				
 					
 					
@@ -64,7 +143,7 @@ $( document ).ready(function() {
 					
 		     		 });*/
 				
-		            $(this).removeClass("hidden");
+		          /*  $(this).removeClass("hidden");
 		            $(this).addClass("visible");
 		            
 		            $(".timelineEntries .visible").each(function(index) {
@@ -77,7 +156,7 @@ $( document ).ready(function() {
 		            count++;
 		           
 		            
-		        }
+		        }*/
 		    });
 		    
 		    if(filter == "") {
@@ -127,7 +206,8 @@ $( document ).ready(function() {
 		        }  else {
 			        $(".searchClear").hide();
 		        }*/
-		       timelinecheck();     
+		       timelinecheck();   
+		       
     	});
     	
     	 

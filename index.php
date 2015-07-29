@@ -38,7 +38,7 @@ get_header(); ?>
 			
 			
 			<div class="timeline">
-				<span class="today"></span>
+				<span class="today"><div class="timelinestartdate"><?php echo date("l F jS, Y"); ?></div><div class="timelinefuturedate">2018</div></span>
 				<span class="end"></span>
 			</div>
 			
@@ -70,7 +70,7 @@ $posts = get_posts(array(
 							
 						}
 						 ?>
-					<div class="singletimelineentry <?php if($todaysDate < $compareFormat) { echo "future"; } ?>">
+					<div class="singletimelineentry <?php if($todaysDate < $compareFormat) { echo "future futureHidden"; } ?>">
 						
 						
 						<div class="timelinecontent">
