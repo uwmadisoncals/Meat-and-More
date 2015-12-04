@@ -394,3 +394,22 @@ Version:        0.1.0
 .cf {
     *zoom: 1;
 }
+
+/** Override header styles to accomodate visual expansion of header */
+
+
+#main2{
+	margin-top:-50px;
+}
+
+div.headertransition{
+	height:80px;
+}
+
+.slideImage .contrastmask2{
+	bottom:80px;
+	height: 200px;
+}
+.home .headerPhotoBg .collegeFeature li .featureCaption, .home .iosSlider .featureCaption {
+ bottom:130px;
+}
